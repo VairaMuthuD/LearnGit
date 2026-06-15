@@ -11,8 +11,6 @@ const Vaira = () => {
     <div>Vaira & Deepu 9 times</div>
     <div>Vaira & Deepu 9 times</div>
     <div>Vaira & Deepu 9 times</div>
-    <div>Vaira & Deepu 9 times</div>
-    <div>Vaira & Deepu 9 times</div>
     </>
   
 }
