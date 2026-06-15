@@ -1,0 +1,46 @@
+name: Deploy HTML Artifact
+
+on:
+  workflow_dispatch:
+    inputs:
+      html_file:
+        description: 'Select the HTML file to deploy'
+        required: true
+        type: choice
+        options:
+          - index.html
+          - about.html
+          - contact.html
+          - services.html
+
+jobs:
+  upload-artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Upload selected HTML file
+        uses: actions/upload-artifact@v4
+        with:
+          name: selected-html
+          path: ${{ github.event.inputs.html_file }}
+
+  deploy:
+    needs: upload-artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: selected-html
+
+      - name: Integrate with backend
+        run: |
+          echo "Integrating ${{ github.event.inputs.html_file }} with backend..."
+          # Add your backend integration commands here
+
+      - name: Deploy to web service
+        run: |
+          echo "Deploying ${{ github.event.inputs.html_file }} to web service..."
+          # Add your deployment commands here
